@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+/* Class-based dark mode (toggled by next-themes on <html>) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------------------------------------------------------------------------
+ * Design tokens — "ink & paper" neutrals with a single teal signal colour.
+ * Light and dark are tuned independently rather than simply inverted.
+ * ------------------------------------------------------------------------- */
+:root {
+  --background: #f7f6f3;
+  --surface: #ffffff;
+  --surface-2: #efede8;
+  --foreground: #16161a;
+  --muted: #5c5b62;
+  --subtle: #8a8990;
+  --border: rgb(22 22 26 / 0.09);
+  --border-strong: rgb(22 22 26 / 0.16);
+  --accent: #0f766e;
+  --accent-strong: #0d5f59;
+  --accent-soft: rgb(15 118 110 / 0.09);
+  --accent-contrast: #ffffff;
+  --glow: rgb(20 184 166 / 0.16);
+  --shadow-color: 30 28 24;
+}
+
+.dark {
+  --background: #0b0c0e;
+  --surface: #121317;
+  --surface-2: #191a1f;
+  --foreground: #ecebe8;
+  --muted: #9d9ca3;
+  --subtle: #6e6d75;
+  --border: rgb(255 255 255 / 0.075);
+  --border-strong: rgb(255 255 255 / 0.14);
+  --accent: #2dd4bf;
+  --accent-strong: #5eead4;
+  --accent-soft: rgb(45 212 191 / 0.1);
+  --accent-contrast: #04211e;
+  --glow: rgb(45 212 191 / 0.12);
+  --shadow-color: 0 0 0;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-contrast: var(--accent-contrast);
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+
+  --radius-card: 1.25rem;
+
+  --shadow-soft:
+    0 1px 2px rgb(var(--shadow-color) / 0.04),
+    0 8px 24px -12px rgb(var(--shadow-color) / 0.12);
+  --shadow-lift:
+    0 1px 2px rgb(var(--shadow-color) / 0.05),
+    0 24px 48px -20px rgb(var(--shadow-color) / 0.22);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-contrast);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+/* Faint engineering grid, faded out towards the edges */
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 40%, transparent 100%);
+}
+
+@utility container-page {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 72rem;
+  padding-inline: 1.25rem;
+
+  @media (width >= 40rem) {
+    padding-inline: 2rem;
+  }
+}
