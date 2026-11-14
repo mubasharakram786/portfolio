@@ -35,7 +35,7 @@ export const siteConfig = {
     "Web Developer Portfolio",
   ],
   /** Set NEXT_PUBLIC_SITE_URL in production so canonical / OG URLs are absolute. */
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  url: process.env.NEXT_PUBLIC_SITE_URL?.trim() || "http://localhost:3000",
   availability: "Open to full-time roles & freelance projects",
 
   email: "mubashararkam127@gmail.com",
